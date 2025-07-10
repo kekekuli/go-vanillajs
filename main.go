@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"kekekuli.tech/keke/handlers"
 	"kekekuli.tech/keke/logger"
 )
 
@@ -19,7 +20,10 @@ func initialzeLogger() *logger.Logger {
 
 func main() {
 	logInstance := initialzeLogger()
+	movieHandler := handlers.MovieHandler{}
 
+	http.HandleFunc("/api/movies/top", movieHandler.GetTopMovies)
+	http.HandleFunc("/api/movies/random", movieHandler.GetRandomMovies)
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	fmt.Println("Server running on http://localhost:8080")
 
