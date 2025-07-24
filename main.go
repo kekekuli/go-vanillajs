@@ -1,10 +1,15 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
+	"kekekuli.tech/keke/data"
 	"kekekuli.tech/keke/handlers"
 	"kekekuli.tech/keke/logger"
 )
@@ -20,15 +25,37 @@ func initialzeLogger() *logger.Logger {
 
 func main() {
 	logInstance := initialzeLogger()
-	movieHandler := handlers.MovieHandler{}
 
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("No .env file was available")
+	}
+
+	dbConnectStr := os.Getenv("DATABASE_URL")
+	if dbConnectStr == "" {
+		log.Fatal("DATABASE_URL not set")
+	}
+	db, err := sql.Open("postgres", dbConnectStr)
+	if err != nil {
+		log.Fatalf("Failed to connect to the DB: %V", err)
+	}
+	defer db.Close()
+
+	movieRepo, err := data.NewMovieRepository(db, logInstance)
+	if err != nil {
+		log.Fatal("Failed to initialize repository")
+	}
+
+	movieHandler := handlers.MovieHandler{
+		Storage: movieRepo,
+		Logger:  logInstance,
+	}
 	http.HandleFunc("/api/movies/top", movieHandler.GetTopMovies)
 	http.HandleFunc("/api/movies/random", movieHandler.GetRandomMovies)
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	fmt.Println("Server running on http://localhost:8080")
 
 	const addr = ":8080"
-	err := http.ListenAndServe(addr, nil)
+	err = http.ListenAndServe(addr, nil)
 	if err != nil {
 		log.Fatalf("Server failed: %s", err)
 		logInstance.Error("Server failed", err)
