@@ -49,8 +49,12 @@ func main() {
 		Storage: movieRepo,
 		Logger:  logInstance,
 	}
-	http.HandleFunc("/api/movies/top", movieHandler.GetTopMovies)
-	http.HandleFunc("/api/movies/random", movieHandler.GetRandomMovies)
+	http.HandleFunc("/api/movies/top/", movieHandler.GetTopMovies)
+	http.HandleFunc("/api/movies/random/", movieHandler.GetRandomMovies)
+	http.HandleFunc("/api/movies/search/", movieHandler.SearchMovies)
+	http.HandleFunc("/api/movies/", movieHandler.GetMovie)
+	http.HandleFunc("/api/genres/", movieHandler.GetGenres)
+
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	fmt.Println("Server running on http://localhost:8080")
 
