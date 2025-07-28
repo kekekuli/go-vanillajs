@@ -1,4 +1,34 @@
 <!doctype html>
-<title>Hello from server</title>
-
-<h1>Hello from Go using Air</h1>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReelingIt - Movies</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="app.webmanifest" />
+    <link rel="icon" href="images/icon.png" />
+    <script type="module" src="app.js" />
+  </head>
+  <body>
+    <header>
+      <h1><img src="images/logo.png" alt="ReelingIt" height="35" /></h1>
+      <nav>
+        <ul>
+          <li><a class="navlink" href="/">Movies</a></li>
+          <li><a class="navlink" href="/account/favorites">Favorites</a></li>
+          <li><a class="navlink" href="/account/watchlist">Watchlist</a></li>
+          <li><a class="navlink" href="/account/">My Account</a></li>
+        </ul>
+      </nav>
+      <div>
+        <form onsubmit="app.search(event)">
+          <input type="search" placeholder="Search Movies" />
+        </form>
+      </div>
+    </header>
+    <main></main>
+    <footer>
+      <p>(c) ReelingIt - kekekuli</p>
+    </footer>
+  </body>
+</html>
