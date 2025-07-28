@@ -1,50 +1,47 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReelingIt - Movies</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="app.webmanifest" />
+    <link rel="icon" href="images/icon.png" />
+    <script type="module" src="app.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ReelingIt - Movies</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="manifest" href="app.webmanifest" />
-  <link rel="icon" href="images/icon.png" />
-  <script type="module" src="app.js" defer></script>
-</head>
-
-<body>
-  <header>
-    <h1><img src="images/logo.png" alt="ReelingIt" height="35" /></h1>
-    <nav>
-      <ul>
-        <li><a class="navlink" href="/">Movies</a></li>
-        <li><a class="navlink" href="/account/favorites">Favorites</a></li>
-        <li><a class="navlink" href="/account/watchlist">Watchlist</a></li>
-        <li><a class="navlink" href="/account/">My Account</a></li>
-      </ul>
-    </nav>
-    <div>
-      <form onsubmit="app.search(event)">
-        <input type="search" placeholder="Search Movies" />
-      </form>
-    </div>
-  </header>
-  <main>
-    <home-page></home-page>
-  </main>
-  <template id="template-home">
-    <section class="vertical-scroll" id="top-10">
-      <h2>This Week's Top movies</h2>
-      <ul></ul>
-    </section>
-    <section class="vertical-scroll" id="top-20">
-      <h2>Somethin to watch today</h2>
-      <ul></ul>
-    </section>
-
-  </template>
-  <footer>
-    <p>(c) ReelingIt - kekekuli</p>
-  </footer>
-</body>
-
+  <body>
+    <header>
+      <h1><img src="images/logo.png" alt="ReelingIt" height="35" /></h1>
+      <nav>
+        <ul>
+          <li><a class="navlink" href="/">Movies</a></li>
+          <li><a class="navlink" href="/account/favorites">Favorites</a></li>
+          <li><a class="navlink" href="/account/watchlist">Watchlist</a></li>
+          <li><a class="navlink" href="/account/">My Account</a></li>
+        </ul>
+      </nav>
+      <div>
+        <form onsubmit="app.search(event)">
+          <input type="search" placeholder="Search Movies" />
+        </form>
+      </div>
+    </header>
+    <main>
+      <home-page></home-page>
+    </main>
+    <template id="template-home">
+      <section class="vertical-scroll" id="top-10">
+        <h2>This Week's Top movies</h2>
+        <ul></ul>
+      </section>
+      <section class="vertical-scroll" id="random">
+        <h2>Something to watch today</h2>
+        <ul></ul>
+      </section>
+    </template>
+    <footer>
+      <p>(c) ReelingIt - kekekuli</p>
+    </footer>
+  </body>
 </html>
