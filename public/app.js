@@ -1,11 +1,12 @@
 import "./components/AnimatedLoading.js"
+import "./components/MovieItem.js";
 import { API } from "./services/API.js";
 import { HomePage } from "./components/HomePage.js";
-import { MovieItemComponent } from "./components/MovieItem.js";
+import { MovieDetailPage } from "./components/MovieDetailsPage.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   document.querySelector("main").appendChild(new HomePage());
-  document.querySelector("main").appendChild(new MovieItemComponent());
+  document.querySelector("main").appendChild(new MovieDetailPage());
 })
 
 window.app = {

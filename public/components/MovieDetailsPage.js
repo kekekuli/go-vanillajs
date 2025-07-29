@@ -1,14 +1,14 @@
 import { API } from "../services/API.js"
 
-class MovieDetailPage extends HTMLElement {
-  id = null
+export class MovieDetailPage extends HTMLElement {
+  id = 14
   movie = null
   constructor() {
     super();
   }
   async render() {
     try {
-      this.movie = await API.getMovieById(this.movie);
+      this.movie = await API.getMovieById(this.id);
     } catch {
       alert("Movie doesn't exist");
       return;
@@ -24,7 +24,7 @@ class MovieDetailPage extends HTMLElement {
   connectedCallback() {
     const id = this.dataset.id;
 
-    thi.render();
+    this.render();
   }
 }
 
