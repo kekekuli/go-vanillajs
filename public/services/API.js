@@ -14,10 +14,10 @@ export const API = {
   },
   fetch: async (serviceName, args) => {
     try {
-      const queryString = args ? new URLSearchParams(args).toString() : "";
-      const response = await fetch(
-        API.baseURL + serviceName + "?" + queryString,
-      );
+      const queryString = args
+        ? "?" + new URLSearchParams(args).toString()
+        : "";
+      const response = await fetch(API.baseURL + serviceName + queryString);
       const result = await response.json();
       return result;
     } catch {
