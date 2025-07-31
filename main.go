@@ -55,13 +55,14 @@ func main() {
 	http.HandleFunc("/api/movies/", movieHandler.GetMovie)
 	http.HandleFunc("/api/genres/", movieHandler.GetGenres)
 
-	catchAllClientRoutesHandler := func(w http.ResponseWriter, r *http.Request){
-			http.ServeFile(w, r, "./public/index.html");	
+	catchAllClientRoutesHandler := func(w http.ResponseWriter, r *http.Request) {
+		logInstance.Info("Hit client fallback")
+		http.ServeFile(w, r, "./public/index.html")
 	}
 
-	http.HandleFunc("/movies", catchAllClientRoutesHandler);
-	http.HandleFunc("/movies/", catchAllClientRoutesHandler);
-	http.HandleFunc("/account", catchAllClientRoutesHandler);
+	http.HandleFunc("/movies", catchAllClientRoutesHandler)
+	http.HandleFunc("/movies/", catchAllClientRoutesHandler)
+	http.HandleFunc("/account/", catchAllClientRoutesHandler)
 
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	fmt.Println("Server running on http://localhost:8080")

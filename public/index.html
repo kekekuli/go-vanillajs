@@ -11,7 +11,6 @@
   <script type="module" src="/app.js" defer></script>
   <base href="/">
 </head>
-</head>
 
 <body>
   <header>
@@ -32,6 +31,13 @@
   </header>
   <main>
   </main>
+
+  <dialog id="alert-modal">
+    <h3>Error</h3>
+    <p>There was error loading the page</p>
+    <button onclick="app.closeError()">OK</button>
+  </dialog>
+
   <template id="template-home">
     <section class="vertical-scroll" id="top-10">
       <h2>This Week's Top movies</h2>
@@ -61,7 +67,6 @@
       <ul id="cast"></ul>
     </article>
   </template>
-
   <footer>
     <p>(c) ReelingIt - kekekuli</p>
   </footer>

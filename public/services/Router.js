@@ -42,13 +42,23 @@ export const Router = {
     }
 
     const mainElement = document.querySelector("main");
-    mainElement.innerHTML = "";
-
+    const oldPage = mainElement.firstElementChild;
+    if (oldPage) oldPage.style.viewTransitionName = "old";
     if (pageElement == null) {
       pageElement = document.createElement("h1");
       pageElement.textContent = "Page not found";
     }
+    pageElement.style.viewTransitionName = "new";
 
-    mainElement.appendChild(pageElement);
+    function updatePage() {
+      mainElement.innerHTML = "";
+      mainElement.appendChild(pageElement);
+    }
+
+    if (!document.startViewTransition) {
+
+    } else {
+      document.startViewTransition(updatePage);
+    }
   },
 };
