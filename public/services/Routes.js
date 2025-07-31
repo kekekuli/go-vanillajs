@@ -8,7 +8,7 @@ export const routes = [
     component: HomePage,
   },
   {
-    path: /\/movie\/(\d+)/,
+    path: /\/movies\/(\d+)/,
     component: MovieDetailPage,
   },
   {

@@ -1,7 +1,7 @@
 import { API } from "../services/API.js";
 
 export class MovieDetailPage extends HTMLElement {
-  id = 14;
+  id = null;
   movie = null;
   constructor() {
     super();
@@ -51,8 +51,7 @@ export class MovieDetailPage extends HTMLElement {
     });
   }
   connectedCallback() {
-    const id = this.dataset.id;
-
+    this.id = this.params[0];
     this.render();
   }
 }

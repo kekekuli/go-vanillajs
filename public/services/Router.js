@@ -1,15 +1,54 @@
-const Router = {
+import { routes } from "./Routes.js";
+export const Router = {
   init: () => {
     window.addEventListener("popstate", () => {
       Router.go(location.pathname);
-
-      //Go to the initial path
-      Router.go(location.pathname + location.search);
     });
+    document.querySelectorAll("a.navlink").forEach(a => {
+      a.addEventListener("click", event => {
+        event.preventDefault();
+        const href = a.getAttribute("href");
+
+        Router.go(href);
+      })
+    });
+
+    Router.go(location.pathname + location.search);
   },
   go: (route, addToHistory = true) => {
     if (addToHistory) {
-      history.pushState();
+      history.pushState(null, "", route);
     }
+
+    let pageElement = null;
+
+    const routePath = route.includes("?") ?
+      route.split("?")[0]
+      : route;
+
+    for (const r of routes) {
+      if (typeof r.path === "string" && r.path === routePath) {
+        pageElement = new r.component();
+        break;
+      } else if (r.path instanceof RegExp) {
+        const match = r.path.exec(routePath);
+        if (match) {
+          pageElement = new r.component();
+          const params = match.slice(1);
+          pageElement.params = params;
+          break;
+        }
+      }
+    }
+
+    const mainElement = document.querySelector("main");
+    mainElement.innerHTML = "";
+
+    if (pageElement == null) {
+      pageElement = document.createElement("h1");
+      pageElement.textContent = "Page not found";
+    }
+
+    mainElement.appendChild(pageElement);
   },
 };
