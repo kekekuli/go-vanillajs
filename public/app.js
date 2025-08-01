@@ -13,15 +13,17 @@ window.app = {
   search: (event) => {
     event.preventDefault();
     const q = document.querySelector("input[type=search]").value;
+
+    app.Router.go("/movies?q=" + q);
   },
   api: API,
   showError: (message = "There was a error", goToHome = true) => {
     const dialog = document.getElementById("alert-modal");
     dialog.showModal();
-    dialog.querySelector("p").textContent = message
+    dialog.querySelector("p").textContent = message;
     if (goToHome) app.Router.go("/");
   },
   closeError: () => {
     document.getElementById("alert-modal").close();
-  }
+  },
 };
