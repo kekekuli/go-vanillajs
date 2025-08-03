@@ -4,13 +4,13 @@ export const Router = {
     window.addEventListener("popstate", () => {
       Router.go(location.pathname);
     });
-    document.querySelectorAll("a.navlink").forEach(a => {
-      a.addEventListener("click", event => {
+    document.querySelectorAll("a.navlink").forEach((a) => {
+      a.addEventListener("click", (event) => {
         event.preventDefault();
         const href = a.getAttribute("href");
 
         Router.go(href);
-      })
+      });
     });
 
     Router.go(location.pathname + location.search);
@@ -22,9 +22,7 @@ export const Router = {
 
     let pageElement = null;
 
-    const routePath = route.includes("?") ?
-      route.split("?")[0]
-      : route;
+    const routePath = route.includes("?") ? route.split("?")[0] : route;
 
     for (const r of routes) {
       if (typeof r.path === "string" && r.path === routePath) {
@@ -56,9 +54,12 @@ export const Router = {
     }
 
     if (!document.startViewTransition) {
-
+      updatePage();
     } else {
-      document.startViewTransition(updatePage);
+      const oldPage = document.querySelector("main").firstElementChild;
+      if (oldPage) oldPage.style.viewTransitionName = "old";
+      pageElement.style.viewTransitionName = "new";
+      document.startViewTransition(() => updatePage());
     }
   },
 };
