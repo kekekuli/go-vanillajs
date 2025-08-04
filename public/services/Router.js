@@ -2,7 +2,7 @@ import { routes } from "./Routes.js";
 export const Router = {
   init: () => {
     window.addEventListener("popstate", () => {
-      Router.go(location.pathname);
+      Router.go(location.pathname, false);
     });
     document.querySelectorAll("a.navlink").forEach((a) => {
       a.addEventListener("click", (event) => {
