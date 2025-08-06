@@ -1,6 +1,8 @@
 import { HomePage } from "../components/HomePage.js";
 import { MovieDetailPage } from "../components/MovieDetailsPage.js";
 import { MoviesPage } from "../components/MoviePage.js";
+import { ResgiterPage } from "../components/ResgiterPage.js";
+import { LoginPage } from "../components/LoginPage.js";
 
 export const routes = [
   {
@@ -14,5 +16,13 @@ export const routes = [
   {
     path: "/movies",
     component: MoviesPage,
+  },
+  {
+    path: "/account/register",
+    component: ResgiterPage,
+  },
+  {
+    path: "/account/login",
+    component: LoginPage,
   },
 ];

@@ -92,6 +92,70 @@
         </ul>
       </section>
     </template>
+    <template id="template-register">
+      <section>
+        <h2>Register a account</h2>
+        <form onsubmit="app.register(event)">
+          <label for="register-name">Name</label>
+          <input id="register-name" type="text" required autocomplete="name" />
+
+          <label for="register-email">Email</label>
+          <input
+            id="register-email"
+            type="email"
+            required
+            autocomplete="email"
+          />
+
+          <label for="register-password">Password</label>
+          <input
+            id="register-password"
+            type="password"
+            required
+            autocomplete="new-password"
+          />
+
+          <label for="register-password-confirmation"
+            >Repeat your password</label
+          >
+          <input id="register-password-confirmation" type="password" required />
+
+          <button>Register</button>
+
+          <p>
+            If you already have an account, please
+            <a href="/account/login">log in</a>.
+          </p>
+        </form>
+      </section>
+    </template>
+    <template id="template-login">
+      <section>
+        <h2>Login in your account</h2>
+        <form onsubmit="app.login(event)">
+          <label for="login-name">Name</label>
+          <input id="login-name" type="text" required autocomplete="name" />
+
+          <label for="login-email">Email</label>
+          <input id="login-email" type="email" required autocomplete="email" />
+
+          <label for="login-password">Password</label>
+          <input
+            id="login-password"
+            type="password"
+            required
+            autocomplete="current-password"
+          />
+
+          <button>Login</button>
+
+          <p>
+            If you don't have an account, please
+            <a href="/account/register">register</a>.
+          </p>
+        </form>
+      </section>
+    </template>
 
     <footer>
       <p>(c) ReelingIt - kekekuli</p>
