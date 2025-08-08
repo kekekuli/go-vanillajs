@@ -89,4 +89,8 @@ window.app = {
       app.showError(errors.join(". "));
     }
   },
+  logout: () => {
+    app.Store.jwt = null;
+    app.Router.go("/");
+  },
 };
