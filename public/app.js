@@ -3,12 +3,14 @@ import "./components/MovieItem.js";
 import "./components/YouTubeEmbed.js";
 import { API } from "./services/API.js";
 import { Router } from "./services/Router.js";
+import Store from "./services/Store.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   app.Router.init();
 });
 
 window.app = {
+  Store,
   Router,
   search: (event) => {
     event.preventDefault();
@@ -58,6 +60,7 @@ window.app = {
     if (errors.length == 0) {
       const response = await API.register(name, email, password);
       if (response.success) {
+        app.Store.jwt = response.jwt;
         app.Router.go("/account/");
       } else {
         app.showError(response.message);
@@ -77,6 +80,7 @@ window.app = {
     if (errors.length == 0) {
       const response = await API.login(email, password);
       if (response.success) {
+        app.Store.jwt = response.jwt;
         app.Router.go("/account/");
       } else {
         app.showError(response.message);
