@@ -70,6 +70,15 @@ func main() {
 	http.HandleFunc("/movies/", catchAllClientRoutesHandler)
 	http.HandleFunc("/account/", catchAllClientRoutesHandler)
 
+	http.Handle("/api/account/favorites/",
+		accountHandler.AuthMiddleware(http.HandlerFunc(accountHandler.GetFavorites)))
+
+	http.Handle("/api/account/watchlist/",
+		accountHandler.AuthMiddleware(http.HandlerFunc(accountHandler.GetWatchlist)))
+
+	http.Handle("/api/account/save-to-collection/",
+		accountHandler.AuthMiddleware(http.HandlerFunc(accountHandler.SaveToCollection)))
+
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	fmt.Println("Server running on http://localhost:8080")
 

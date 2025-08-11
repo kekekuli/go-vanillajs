@@ -24,9 +24,11 @@ export const Router = {
 
     const routePath = route.includes("?") ? route.split("?")[0] : route;
 
+    let needLogin;
     for (const r of routes) {
       if (typeof r.path === "string" && r.path === routePath) {
         pageElement = new r.component();
+        needLogin = r.IsLoggedIn;
         break;
       } else if (r.path instanceof RegExp) {
         const match = r.path.exec(routePath);
@@ -34,8 +36,16 @@ export const Router = {
           pageElement = new r.component();
           const params = match.slice(1);
           pageElement.params = params;
+          needLogin = r.IsLoggedIn;
           break;
         }
+      }
+    }
+
+    if (pageElement) {
+      if (needLogin === true && app.Store.loggedIn == false) {
+        app.Router.go("/account/login");
+        return;
       }
     }
 

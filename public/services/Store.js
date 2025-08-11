@@ -1,7 +1,7 @@
 const Store = {
   jwt: null,
   get loggedIn() {
-    return !!this.jwt;
+    return this.jwt !== null;
   },
 };
 
@@ -11,10 +11,14 @@ if (localStorage.getItem("jwt")) {
 
 const proxiedStore = new Proxy(Store, {
   set: (target, prop, value) => {
-    if (prop === "jwt") {
+    if (prop == "jwt") {
       target[prop] = value;
-      localStorage.setItem("jwt", value);
 
+      if (value == null) {
+        localStorage.removeItem("jwt");
+      } else {
+        localStorage.setItem("jwt", value);
+      }
       return true;
     }
   },
