@@ -232,7 +232,7 @@ func (h *AccountHandler) GetWatchlist(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err := h.writeJSONResponse(w, details.Watchlist); err == nil {
-		h.logger.Info("Successfully sent favorites")
+		h.logger.Info("Successfully sent watchlist")
 	}
 }
 

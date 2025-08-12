@@ -27,14 +27,16 @@ export const API = {
   getWatchlist: async () => {
     return await API.fetch("account/watchlist/");
   },
-  saveToCollection: async (movie_id, collection) => {},
+  saveToCollection: async (movie_id, collection) => {
+    return await API.send("account/save-to-collection/", { movie_id, collection });
+  },
   send: async (serviceName, data) => {
     try {
       const response = await fetch(API.baseURL + serviceName, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorzation: app.Store.jwt ? `Bearer ${app.Store.jwt}` : null,
+          Authorization: app.Store.jwt ? `Bearer ${app.Store.jwt}` : null,
         },
         body: JSON.stringify(data),
       });

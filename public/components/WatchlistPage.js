@@ -1,9 +1,8 @@
-import API from "../services/API.js";
 import { CollectionPage } from "./CollectionPage.js";
 
-export default class WatchlistPage extends CollectionPage {
+export class WatchlistPage extends CollectionPage {
   constructor() {
-    super(API.getWatchlist, "Movie Watchlist");
+    super(app.api.getWatchlist, "Movie Watchlist");
   }
 }
 customElements.define("watchlist-page", WatchlistPage);
